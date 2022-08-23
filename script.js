@@ -395,58 +395,58 @@ And she's buying a stairway to Heaven`,
         We're off to never-never land`,
         video: `<iframe width="100%" height="500px"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     },
-    
+
 ];
-    
 
-    for (let i=0; i <= playList.length; i+=1){
-        const ol = document.querySelector('.songs__list')
-        const li = document.createElement('li');
-        const song = document.createElement('span');
-        const button = document.createElement('button');
-        const myModal = document.createElement('div');
-        const modalContent = document.createElement('div');
-        const closeBtn = document.createElement('span');
-        const lyrics = document.createElement('p');
-        const videoFrame = document.createElement('div');
 
-        ol.append(li)
+for (let i = 0; i <= playList.length; i += 1) {
+    const ol = document.querySelector('.songs__list')
+    const li = document.createElement('li');
+    const song = document.createElement('span');
+    const button = document.createElement('button');
+    const myModal = document.createElement('div');
+    const modalContent = document.createElement('div');
+    const closeBtn = document.createElement('span');
+    const lyrics = document.createElement('p');
+    const videoFrame = document.createElement('div');
 
-        li.append(song ,button, myModal)
-        button.classList.add('myBtn', 'fa-solid', 'fa-music')
-        song.classList.add('song')
-        myModal.classList.add('myModal', 'modal')
+    ol.append(li)
 
-    
-        myModal.append(modalContent)
-        modalContent.classList.add('modal-content')
+    li.append(song, button, myModal)
+    button.classList.add('myBtn', 'fa-solid', 'fa-music')
+    song.classList.add('song')
+    myModal.classList.add('myModal', 'modal')
 
-        modalContent.append(closeBtn, lyrics, videoFrame)
-        videoFrame.classList.add('video')
-        closeBtn.classList.add('close')
-        lyrics.classList.add('lyrics')
-    
-        videoFrame.innerHTML = playList[i].video;
-        song.innerText = playList[i].song;
-        closeBtn.innerText = 'x';
-        lyrics.innerText = playList[i].lyrics;
 
-        button.onclick = function() {
-            myModal.style.display = "block";
-          }
-          
-          // When the user clicks on <span> (x), close the modal
-          closeBtn.onclick = function() {
+    myModal.append(modalContent)
+    modalContent.classList.add('modal-content')
+
+    modalContent.append(closeBtn, lyrics, videoFrame)
+    videoFrame.classList.add('video')
+    closeBtn.classList.add('close')
+    lyrics.classList.add('lyrics')
+
+    videoFrame.innerHTML = playList[i].video;
+    song.innerText = playList[i].song;
+    closeBtn.innerText = 'x';
+    lyrics.innerText = playList[i].lyrics;
+
+    button.onclick = function () {
+        myModal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    closeBtn.onclick = function () {
+        myModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === myModal) {
             myModal.style.display = "none";
-          }
-          
-          // When the user clicks anywhere outside of the modal, close it
-          window.onclick = function(event) {
-            if (event.target === myModal) {
-              myModal.style.display = "none";
-            }
-          }
-        
+        }
+    }
+
 }
 
 
