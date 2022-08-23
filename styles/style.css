@@ -67,12 +67,6 @@ ol {
   list-style-type: disclosure-closed;
 }
 
-.songs__container {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-}
-
 .myBtn {
   margin-left: 20px;
   background-color: rgb(255, 0, 106);
@@ -83,15 +77,14 @@ ol {
   padding-top: 0px;
   position: relative;
   top: -5px;
-
 }
-.song{
+.song {
   margin-left: 20px;
 }
-.lyrics{
+.lyrics {
   text-align: center;
 }
-.songs__list{
+.songs__list {
   display: flex;
   flex-direction: column;
   gap: 15px;
