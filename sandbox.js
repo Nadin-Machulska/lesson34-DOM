@@ -394,59 +394,115 @@ And she's buying a stairway to Heaven`,
         Take my hand
         We're off to never-never land`,
         video: `<iframe width="100%" height="500px"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-    },
-    
+    }
 ];
-    
+// const li = document.createElement('li');
+// const song = document.createElement('span');
+// const button = document.createElement('button');
+// const myModal = document.createElement('div');
+// const modalContent = document.createElement('div');
+// const closeBtn = document.createElement('span');
+// const lyrics = document.createElement('p');
+// const videoFrame = document.createElement('div');
 
-    for (let i=0; i <= playList.length; i+=1){
-        const ol = document.querySelector('.songs__list')
-        const li = document.createElement('li');
-        const song = document.createElement('span');
-        const button = document.createElement('button');
-        const myModal = document.createElement('div');
-        const modalContent = document.createElement('div');
-        const closeBtn = document.createElement('span');
-        const lyrics = document.createElement('p');
-        const videoFrame = document.createElement('div');
 
-        ol.append(li)
 
-        li.append(song ,button, myModal)
-        button.classList.add('myBtn', 'fa-solid', 'fa-music')
-        song.classList.add('song')
-        myModal.classList.add('myModal', 'modal')
+const songList = document.querySelector('.songs__list')
+let abc = ``;
+playList.forEach(({song, lyrics, video}) => {
+    abc += `
+    <div class="swiper-slide">
+        <span class="song">${song}</span>
+        <button class="myBtn "><i class="fa-solid fa-music"></i></button>
+        <div class="myModal modal">
+            <div class="modal-content">
+                <span class="close">'x'</span>
+                <p class= "lyrics">${lyrics}</p>
+                <div class="video">${video}</div>
+            </div>
+        </div>
+    </div>
+    `
+})
 
-    
-        myModal.append(modalContent)
-        modalContent.classList.add('modal-content')
+songList.innerHTML = abc;
 
-        modalContent.append(closeBtn, lyrics, videoFrame)
-        videoFrame.classList.add('video')
-        closeBtn.classList.add('close')
-        lyrics.classList.add('lyrics')
-    
-        videoFrame.innerHTML = playList[i].video;
-        song.innerText = playList[i].song;
-        closeBtn.innerText = 'x';
-        lyrics.innerText = playList[i].lyrics;
 
-        button.onclick = function() {
-            myModal.style.display = "block";
-          }
-          
-          // When the user clicks on <span> (x), close the modal
-          closeBtn.onclick = function() {
-            myModal.style.display = "none";
-          }
-          
-          // When the user clicks anywhere outside of the modal, close it
-          window.onclick = function(event) {
-            if (event.target === myModal) {
-              myModal.style.display = "none";
+for (let i = 0; i <= playList.length; i += 1) {
+
+
+
+    const button = document.querySelector('.myBtn')
+    const myModal = document.querySelector('.myModal')
+    const closeBtn = document.querySelector('.close')
+
+
+
+
+
+    // songList.addEventListener('click', (event) => {
+
+        // if (event.target.classList.contains('.myBtn')) {
+
+            button.onclick = openModal;
+            function openModal () {
+                // const song = playList.find(song => playList.song === songItem)
+                myModal.style.display = "block";
             }
-          }
-        
+
+            closeBtn.onclick = closeModal
+            function closeModal () {
+                myModal.style.display = "none";
+            }
+
+            // window.onclick = function (event) {
+            //     if (event.target === myModal) {
+            //         myModal.style.display = "none";
+            //     }
+            // }
+        // }
+    // })
+
+
+
+    // ol.append(li)
+
+    // li.classList.add('swiper-slide')
+    // li.append(song, button, myModal)
+    // button.classList.add('myBtn', 'fa-solid', 'fa-music')
+    // song.classList.add('song')
+    // myModal.classList.add('myModal', 'modal')
+
+
+    // myModal.append(modalContent)
+    // modalContent.classList.add('modal-content')
+
+    // modalContent.append(closeBtn, lyrics, videoFrame)
+    // videoFrame.classList.add('video')
+    // closeBtn.classList.add('close')
+    // lyrics.classList.add('lyrics')
+
+    // videoFrame.innerHTML = playList[i].video;
+    // song.innerText = playList[i].song;
+    // closeBtn.innerText = 'x';
+    // lyrics.innerText = playList[i].lyrics;
+
+
+
+    // When the user clicks on <span> (x), close the modal
+
 }
 
 
+// var swiper = new Swiper(".swiper myswiper", {
+//     cssMode: true,
+//     navigation: {
+//       nextEl: ".swiper-button-next",
+//       prevEl: ".swiper-button-prev",
+//     },
+//     pagination: {
+//       el: ".swiper-pagination",
+//     },
+//     mousewheel: true,
+//     keyboard: true,
+//   })

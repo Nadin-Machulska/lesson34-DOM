@@ -1,5 +1,5 @@
 /* The Modal (background) */
-.myModal {
+.modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -88,4 +88,14 @@ ol {
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+.swiper-pagination{
+  color: blue;
+}
+.swiper-button-next{
+  color: blue;
+}
+.swiper-button-prev{
+  width: 50px;
+  height: 50px;
 }

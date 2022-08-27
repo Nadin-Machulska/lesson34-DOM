@@ -395,58 +395,68 @@ And she's buying a stairway to Heaven`,
         We're off to never-never land`,
         video: `<iframe width="100%" height="500px"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     },
-    
+
 ];
-    
 
-    for (let i=0; i <= playList.length; i+=1){
-        const ol = document.querySelector('.songs__list')
-        const li = document.createElement('li');
-        const song = document.createElement('span');
+let playListLength = playList.length;
+const songList = document.querySelector('.songs__list');
+
+function makeSongsList(playListLength) {
+    const list = [];
+
+    for (let i = 0; i < playListLength; i += 1) {
+        list.push(document.createElement('li'));
+
+
+    }
+    list.forEach(el => {
+        const span = document.createElement('span');
         const button = document.createElement('button');
-        const myModal = document.createElement('div');
-        const modalContent = document.createElement('div');
-        const closeBtn = document.createElement('span');
-        const lyrics = document.createElement('p');
-        const videoFrame = document.createElement('div');
-
-        ol.append(li)
-
-        li.append(song ,button, myModal)
-        button.classList.add('myBtn', 'fa-solid', 'fa-music')
-        song.classList.add('song')
-        myModal.classList.add('myModal', 'modal')
-
-    
-        myModal.append(modalContent)
-        modalContent.classList.add('modal-content')
-
-        modalContent.append(closeBtn, lyrics, videoFrame)
-        videoFrame.classList.add('video')
-        closeBtn.classList.add('close')
-        lyrics.classList.add('lyrics')
-    
-        videoFrame.innerHTML = playList[i].video;
-        song.innerText = playList[i].song;
-        closeBtn.innerText = 'x';
-        lyrics.innerText = playList[i].lyrics;
-
-        button.onclick = function() {
-            myModal.style.display = "block";
-          }
-          
-          // When the user clicks on <span> (x), close the modal
-          closeBtn.onclick = function() {
-            myModal.style.display = "none";
-          }
-          
-          // When the user clicks anywhere outside of the modal, close it
-          window.onclick = function(event) {
-            if (event.target === myModal) {
-              myModal.style.display = "none";
-            }
-          }
-        
+       
+        el.append(span, button);
+        span.classList.add('song-name');
+        button.classList.add('myBtn', 'fa-solid', 'fa-music');
+    })
+    return list;
 }
 
+const listItems = makeSongsList(playListLength)
+songList.append(...listItems);
 
+// const li = document.querySelector('li');
+// li.classList.add('song-item');
+
+const spans = document.querySelectorAll('.song-name');
+
+function writeDownSongs() {
+    for (let i = 0; i < playList.length; i += 1) {
+        spans[i].innerText = playList[i].song
+        listItems[i].dataset.text = playList[i].lyrics
+    }
+}
+
+const spanText = writeDownSongs();
+
+const modal = document.querySelector('.modal');
+const modalBtn = document.querySelector('.myBtn');
+const  modalContent = document.querySelector('.modal-content');
+
+songList.addEventListener('click', showModalOnBtnClick);
+
+function showModalOnBtnClick(event){
+    event.target.localName = 'button';
+    event.target.tagName = 'BUTTON';
+
+    if(event.target.classList.contains('myBtn')) {
+        modalContent.innerText = event.target.closest('li').dataset.text;
+        modal.style.display = "block";
+    }
+}
+
+window.addEventListener('click', closeModal);
+
+function closeModal (event){
+    if (event.target === modal){
+        modal.style.display = "none";
+    }
+}

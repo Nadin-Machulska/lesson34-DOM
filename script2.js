@@ -1,5 +1,12 @@
-$('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
+const swiper = new Swiper(".swiper myswiper", {
+  cssMode: true,
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  pagination: {
+    el: ".swiper-pagination",
+  },
+  mousewheel: true,
+  keyboard: true,
 })
-
-$('#myModal').modal(options)
