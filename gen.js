@@ -460,3 +460,43 @@ function closeModal (event){
         modal.style.display = "none";
     }
 }
+
+const buttonsContainer = document.querySelector('.swiper-pagination')
+
+// function makePaginationButtons(playListLength){
+//     let btns = [];
+//     for (let i = 0; i < playListLength; i += 1) {
+//         btns.push(document.createElement('button'));
+
+//         btns.forEach(el => 
+//            el.classList.add('pagination-btn') 
+//             )
+// }
+// return btns
+// }
+function showSlide (index){
+    index = index % songList.children.length;
+    songList.children[index].scrollIntoView({ behavior: 'smooth'});
+}
+
+function makePaginationButtons(count){
+    let btns = [];
+    for (let i = 0; i < count; i += 1) {
+        btns.push(document.createElement('button'));
+        btns[i].addEventListener('click', () => showSlide(i));
+        // btns[i].style.backgroundColor = colors[i];
+        btns.forEach(el => 
+           el.classList.add('pagination-btn') 
+            )
+}
+
+return btns
+}
+
+const buttonsClick = makePaginationButtons(8)
+
+const btns = makePaginationButtons(playListLength);
+buttonsContainer.append(...btns);
+const buttonsPag = buttonsContainer.querySelector('button');
+
+
