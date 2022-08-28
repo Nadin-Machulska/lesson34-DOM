@@ -3,6 +3,7 @@ const playList = [
     {
         author: "LED ZEPPELIN",
         song: "STAIRWAY TO HEAVEN",
+        image: "url('styles/images/led-zeppelin-poster1.jpg')",
         lyrics: `[Intro]
         [Verse 1]
 There's a lady who's sure all that glitters is gold
@@ -72,6 +73,7 @@ And she's buying a stairway to Heaven`,
     {
         author: "QUEEN",
         song: "BOHEMIAN RHAPSODY",
+        image: "url('styles/images/queen-poster1.jpg')",
         lyrics: `Is this the real life?
         Is this just fantasy?
         Caught in a landside,
@@ -137,6 +139,7 @@ And she's buying a stairway to Heaven`,
     {
         author: "LYNYRD SKYNYRD",
         song: "FREE BIRD",
+        image: "url('styles/images/lynyrd-skynird-poster2.jpg')",
         lyrics: `If I leave here tomorrow
         Would you still remember me?
         For I must be traveling on now
@@ -173,6 +176,7 @@ And she's buying a stairway to Heaven`,
     {
         author: "DEEP PURPLE",
         song: "SMOKE ON THE WATER",
+        image: "url('styles/images/deep-purple-poster1.jpg')",
         lyrics: `We all came out to Montreux
         On the Lake Geneva shoreline
         To make records with a mobile
@@ -212,6 +216,7 @@ And she's buying a stairway to Heaven`,
     {
         author: "JIMI HENDRIX",
         song: "ALL ALONG THE WATCHTOWER",
+        image: "url('styles/images/jimi-hendrix-poster1.jpg')",
         lyrics: `There must be some kind of way outta here
         Said the joker to the thief
         There's too much confusion
@@ -248,6 +253,7 @@ And she's buying a stairway to Heaven`,
     {
         author: "AC/DC",
         song: "BACK IN BLACK",
+        image: "url('styles/images/ac-dc-poster1.jpg')",
         lyrics: `Back in black
         I hit the sack
         I've been too long, I'm glad to be back
@@ -313,6 +319,7 @@ And she's buying a stairway to Heaven`,
     {
         author: "QUEEN",
         song: "WE WILL ROCK YOU",
+        image: "url('styles/images/queen-poster2.jpg')",
         lyrics: `Buddy, you're a boy, make a big noise
         Playing in the street, gonna be a big man someday
         You got mud on your face, you big disgrace
@@ -342,6 +349,7 @@ And she's buying a stairway to Heaven`,
     {
         author: "METALLICA",
         song: "ENTER SANDMAN",
+        image: "url('styles/images/metalicca-poster1.jpg')",
         lyrics: `Say your prayers, little one
         Don't forget, my son
         To include everyone
@@ -406,15 +414,17 @@ function makeSongsList(playListLength) {
 
     for (let i = 0; i < playListLength; i += 1) {
         list.push(document.createElement('li'));
-
-
+        
+        
     }
     list.forEach(el => {
         const span = document.createElement('span');
+        // const poster = document.createElement('image');
         const button = document.createElement('button');
-       
+        
         el.append(span, button);
         span.classList.add('song-name');
+        // poster.classList.add('group-poster')
         button.classList.add('myBtn', 'fa-solid', 'fa-music');
     })
     return list;
@@ -423,15 +433,19 @@ function makeSongsList(playListLength) {
 const listItems = makeSongsList(playListLength)
 songList.append(...listItems);
 
-// const li = document.querySelector('li');
-// li.classList.add('song-item');
+
 
 const spans = document.querySelectorAll('.song-name');
 
 function writeDownSongs() {
+    const list = document.querySelectorAll('li');
+    
     for (let i = 0; i < playList.length; i += 1) {
         spans[i].innerText = playList[i].song
-        listItems[i].dataset.text = playList[i].lyrics
+        listItems[i].dataset.text = playList[i].lyrics;
+        list[i].classList.add('swiper-slide');
+        list[i].style.backgroundImage = playList[i].image; 
+        list[i].style.backgroundSize = '100% 100%'
     }
 }
 
@@ -493,10 +507,38 @@ function makePaginationButtons(count){
 return btns
 }
 
-const buttonsClick = makePaginationButtons(8)
+const buttonsClick = makePaginationButtons(playListLength)
 
 const btns = makePaginationButtons(playListLength);
 buttonsContainer.append(...btns);
 const buttonsPag = buttonsContainer.querySelector('button');
 
+const prevBtn = document.querySelector('.scroll-left');
+const nextBtn = document.querySelector('.scroll-right');
+const itemWidth = 600;
+const slidesToShow = 1;
+const slidesToScroll = 1;
+const movePosition = slidesToScroll * itemWidth;
+let position = 0;
+
+nextBtn.addEventListener('click', () =>{
+    const itemsLeft = playListLength - (Math.abs(position) + slidesToShow * itemWidth) / itemWidth;
+
+    position -= itemsLeft >= slidesToScroll ?  movePosition : itemsLeft * itemWidth;
+
+    setPosition();
+});
+
+prevBtn.addEventListener('click', () =>{
+    const itemsLeft = Math.abs(position) / itemWidth;
+
+    position += itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+
+    setPosition()
+})
+
+
+function setPosition (){
+    songList.style.transform = `translateX(${position}px)`;
+};
 
