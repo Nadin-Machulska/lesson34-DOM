@@ -2,7 +2,7 @@
 @font-face {
   font-family: "Vampire Wars";
   src: url("fonts/Vampire Wars.eot");
-  src: local("☺"), url("styles/fonts/Vampire Wars.woff") format("woff"),
+  src: local("☺"), url("fonts/Vampire Wars.woff") format("woff"),
     url("fonts/Vampire Wars.ttf") format("truetype"),
     url("fonts/Vampire Wars.svg") format("svg");
   font-weight: normal;
@@ -74,6 +74,7 @@ li {
   height: 100%;
   flex-shrink: 0;
   transition: all ease 0.3s;
+  border-radius: 36px;
   /* background-image: url(./images/led-zeppelin-poster1.jpg); */
 }
 
