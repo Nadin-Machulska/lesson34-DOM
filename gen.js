@@ -414,14 +414,14 @@ function makeSongsList(playListLength) {
 
     for (let i = 0; i < playListLength; i += 1) {
         list.push(document.createElement('li'));
-        
-        
+
+
     }
     list.forEach(el => {
         const span = document.createElement('span');
         // const poster = document.createElement('image');
         const button = document.createElement('button');
-        
+
         el.append(span, button);
         span.classList.add('song-name');
         // poster.classList.add('group-poster')
@@ -439,12 +439,12 @@ const spans = document.querySelectorAll('.song-name');
 
 function writeDownSongs() {
     const list = document.querySelectorAll('li');
-    
+
     for (let i = 0; i < playList.length; i += 1) {
         spans[i].innerText = playList[i].song
         listItems[i].dataset.text = playList[i].lyrics;
         list[i].classList.add('swiper-slide');
-        list[i].style.backgroundImage = playList[i].image; 
+        list[i].style.backgroundImage = playList[i].image;
         list[i].style.backgroundSize = '100% 100%'
     }
 }
@@ -453,15 +453,15 @@ const spanText = writeDownSongs();
 
 const modal = document.querySelector('.modal');
 const modalBtn = document.querySelector('.myBtn');
-const  modalContent = document.querySelector('.modal-content');
+const modalContent = document.querySelector('.modal-content');
 
 songList.addEventListener('click', showModalOnBtnClick);
 
-function showModalOnBtnClick(event){
+function showModalOnBtnClick(event) {
     event.target.localName = 'button';
     event.target.tagName = 'BUTTON';
 
-    if(event.target.classList.contains('myBtn')) {
+    if (event.target.classList.contains('myBtn')) {
         modalContent.innerText = event.target.closest('li').dataset.text;
         modal.style.display = "block";
     }
@@ -469,8 +469,8 @@ function showModalOnBtnClick(event){
 
 window.addEventListener('click', closeModal);
 
-function closeModal (event){
-    if (event.target === modal){
+function closeModal(event) {
+    if (event.target === modal) {
         modal.style.display = "none";
     }
 }
@@ -488,23 +488,23 @@ const buttonsContainer = document.querySelector('.swiper-pagination')
 // }
 // return btns
 // }
-function showSlide (index){
+function showSlide(index) {
     index = index % songList.children.length;
-    songList.children[index].scrollIntoView({ behavior: 'smooth'});
+    songList.children[index].scrollIntoView({ behavior: 'smooth' });
 }
 
-function makePaginationButtons(count){
+function makePaginationButtons(count) {
     let btns = [];
     for (let i = 0; i < count; i += 1) {
         btns.push(document.createElement('button'));
         btns[i].addEventListener('click', () => showSlide(i));
         // btns[i].style.backgroundColor = colors[i];
-        btns.forEach(el => 
-           el.classList.add('pagination-btn') 
-            )
-}
+        btns.forEach(el =>
+            el.classList.add('pagination-btn')
+        )
+    }
 
-return btns
+    return btns
 }
 
 const buttonsClick = makePaginationButtons(playListLength)
@@ -521,15 +521,15 @@ const slidesToScroll = 1;
 const movePosition = slidesToScroll * itemWidth;
 let position = 0;
 
-nextBtn.addEventListener('click', () =>{
+nextBtn.addEventListener('click', () => {
     const itemsLeft = playListLength - (Math.abs(position) + slidesToShow * itemWidth) / itemWidth;
 
-    position -= itemsLeft >= slidesToScroll ?  movePosition : itemsLeft * itemWidth;
+    position -= itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
 
     setPosition();
 });
 
-prevBtn.addEventListener('click', () =>{
+prevBtn.addEventListener('click', () => {
     const itemsLeft = Math.abs(position) / itemWidth;
 
     position += itemsLeft >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
@@ -538,7 +538,7 @@ prevBtn.addEventListener('click', () =>{
 })
 
 
-function setPosition (){
+function setPosition() {
     songList.style.transform = `translateX(${position}px)`;
 };
 
